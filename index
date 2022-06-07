@@ -1,0 +1,427 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+
+<style>
+.slick_slider img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    object-position: center center;
+}
+.slider.slick_slider {
+    position: relative;
+}
+.slider.slick_slider button.slick-arrow {
+    position: absolute;
+    top: 50%;
+}
+.slick_slider button.slick-prev {
+    left: 5%;
+    z-index: 1;
+}
+.slick_slider button.slick-next {
+    right: 5%;
+    z-index: 1;
+}
+.slick_slider .item {
+    position: relative;
+}
+.slick_slider .slider_description .page-width {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    width: 100%;
+  	max-width: {{ section.settings.disc_range }}%;
+    justify-content: flex-start;
+}
+.slick_slider .item:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  	background-color: {{ section.settings.overly_color }};
+  	opacity: {{ section.settings.overly_range}}%;
+    top: 0;
+    left: 0;
+}
+.slick_slider .item h2{
+  	color: {{ section.settings.color_heading}};
+  	font-weight: bold;
+  	font-size: {{ section.settings.head_size }}px;
+    margin: 0;
+  	order: {{ section .settings.head_order}};
+    width: 100%;
+}
+.slick_slider .item P{
+  	color: {{ section.settings.color_paragraph}};
+  	font-size: {{ section.settings.paragraph_size }}px;
+    margin: 0;
+    order: 2;
+    width: 100%;
+}
+.slick_slider .item a {
+    text-decoration: none;
+    padding: 15px 40px;
+    background-color: {{section.settings.color_btn}};
+    color: {{section.settings.color_txt_btn}};
+  	transition: .5s;
+}
+.slick_slider .item .slid_btn {
+    width: 100%;
+    order: 3;
+    height: auto;
+    display: inline-flex;
+}
+.slick_slider .item a:hover {
+    background-color: {{section.settings.color_hover_btn}};
+    color: {{section.settings.color_hover_txt_btn}};
+}
+.slider.slick_slider ul.slick-dots {
+    bottom: 10px;
+}
+.slider.slick_slider ul.slick-dots li {
+    width: 40px;
+    height: 15px;
+}
+.slider.slick_slider ul.slick-dots li button {
+    width: 100%;
+  	background-color: {{ section.settings.button_color}};
+    border-radius: 50px;
+    height: 100%;
+}
+.slider.slick_slider ul.slick-dots li.slick-active button {
+    background-color: {{ section.settings.button_active_color}};
+}
+.slider.slick_slider ul.slick-dots li button:before {
+    display: none;
+}
+  
+.slider.slick_slider button.slick-arrow {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+  	border: 2px solid {{ section.settings.arrow_color}};
+  	transition: .5s;
+}
+.slider.slick_slider button.slick-arrow:before {
+    color:  {{ section.settings.arrow_color}};
+    font-size: 42px;
+    font-family: cursive;
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-37%, -56%);
+  	opacity: 1;
+  	transition: .5s;
+}
+ 
+.slider.slick_slider button.slick-arrow:hover {
+  	border: 2px solid {{ section.settings.arrow_hover_color}};
+}
+.slider.slick_slider button.slick-arrow:hover:before {
+    color:  {{ section.settings.arrow_hover_color}};
+}
+.slider.slick_slider button.slick-next.slick-arrow:before {
+    content: ">" !important;
+}
+.slider.slick_slider button.slick-prev.slick-arrow:before {
+    content: "<" !important;
+}
+.slick_slider .slider_description.alignment_left {
+    justify-content: start;
+  	text-align: left;
+}
+.slick_slider .slider_description.alignment_center {
+    justify-content: center;
+  	text-align: cneter;
+}
+.slick_slider .slider_description.alignment_right {
+    justify-content: end;
+  	text-align: right;
+}
+.slick_slider .item a{
+  	padding: {{ block.settings.padding_sec}}px;
+}
+.hide{
+	display: none;  
+}
+</style>
+
+  <div class="slider slick_slider">
+    {%- for block in section.blocks -%}
+      <div class="item">
+          <img src="{{ block.settings.image | image_url: width: 1500 }}">
+              <div class="slider_description {{ block.settings.alignment_txt}}">
+          <div class="page-width">
+                <h2 class="{% if block.settings.head_hide != blank %} hide {% endif %}">{{ block.settings.Head_txt }}</h2>
+                <p class="{% if block.settings.pargraph_hide != blank %} hide {% endif %}">{{ block.settings.pargraph_txt }}</p>
+                <div class="slid_btn">
+                  <a href="{{ block.settings.slider_button_url }}">{{ block.settings.slider_button_txt }}</a>
+                </div>
+              </div>
+        </div>
+    </div>
+  	{%- endfor -%}
+  </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Slick script -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script type="text/javascript">
+  $('.slider').slick({
+    dots: true,
+    infinite: true,
+    autoplay: {{ section.settings.slider_loop }},
+    autoplaySpeed: 2000
+  });
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "slick_slider",
+    "settings": [
+        {
+        "type": "select",
+        "id": "slider_loop",
+        "options": [
+          {
+            "value": "true",
+            "label": "true"
+          },
+          {
+            "value": "false",
+            "label": "false"
+          }
+          ],
+            "default": "false",
+            "label": "Slider auto"
+        },
+        {
+          "type": "color",
+          "id": "overly_color",
+          "label": "Overly color",
+          "default": "#000"
+        },
+        {
+          "type": "range",
+          "id": "overly_range",
+          "label": "Overly opacity",
+		  "min" : 0,
+		  "max" : 100,
+		  "step" : 1,
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "color_heading",
+          "label": "Heading color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "header",
+          "content": "Description"
+        },
+		{
+			"type" : "range",
+			"id" : "head_size",
+			"label" : "Heading Font size",
+			"min" : 32,
+			"max" : 100,
+            "step" : 2,
+            "default": 32
+		},
+        {
+          "type": "color",
+          "id": "color_paragraph",
+          "label": "Paragraph color",
+          "default": "#000"
+        },
+		{
+			"type" : "range",
+			"id" : "paragraph_size",
+			"label" : "Paragraph Font size",
+			"min" : 0,
+			"max" : 100,
+            "step" : 2,
+            "default": 20
+		},
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "color",
+          "id": "color_btn",
+          "label": "Button Background color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_txt_btn",
+          "label": "Button text color",
+          "default": "#FFF"
+        },
+        {
+          "type": "color",
+          "id": "color_hover_btn",
+          "label": "Button Background hover color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_hover_txt_btn",
+          "label": "Button text hover color",
+          "default": "#FFF"
+        },
+        {
+          "type": "header",
+          "content": "Arrow Color"
+        },
+        {
+          "type": "color",
+          "id": "arrow_color",
+          "label": "Arrow color",
+          "default": "#FFF"
+        },
+        {
+          "type": "color",
+          "id": "arrow_hover_color",
+          "label": "Arrow Hover color",
+          "default": "#000"
+        },
+        {
+          "type": "header",
+          "content": "Button Color"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button color",
+          "default": "#FFF"
+        },
+        {
+          "type": "color",
+          "id": "button_active_color",
+          "label": "Button Active color",
+          "default": "#000"
+        },
+        {
+          "type": "range",
+          "id": "disc_range",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "disc_width",
+          "default": 60
+        },
+        {
+          "type": "range",
+          "id": "head_order",
+          "label" : "Heading order",
+          "min" : 0,
+          "max" : 3,
+          "step": 1,
+          "default": 0
+        }
+	],
+	  "blocks": [
+        {
+          "type": "slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
+          "limit": 5,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "t:sections.slideshow.blocks.slide.settings.image.label"
+            },
+			{
+            "type": "select",
+            "id": "alignment_txt",
+            "options": [
+                {
+                    "value": "alignment_left",
+                    "label": "left"
+                },
+                {
+                    "value": "alignment_center",
+                    "label": "center"
+                },
+                {
+                    "value": "alignment_right",
+                    "label": "right"
+                }
+              ],
+              "default": "alignment_left",
+              "label": "Alignment"
+            },
+			{
+              "type": "checkbox",
+              "id": "head_hide",
+              "label": "Hide Headeing",
+              "default": false
+            },
+            {
+              "type": "text",
+              "id": "Head_txt",
+              "label": "Heading Text",
+			  "default" : "Lorem ipsum"
+            },
+			{
+              "type": "checkbox",
+              "id": "pargraph_hide",
+              "label": "Hide Pargraph",
+              "default": false
+            },
+            {
+              "type": "text",
+              "id": "pargraph_txt",
+              "label": "Pargraph Text",
+			  "default" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+              "type": "text",
+              "id": "slider_button_txt",
+              "label": "Slider button Text",
+			  "default" : "Button"
+            },
+            {
+              "type": "url",
+              "id": "slider_button_url",
+              "label": "Slider Button URL"
+            },
+			{
+				"type": "range",
+				"id": "padding_sec",
+				"label" : "button",
+				"min" : 0,
+				"max" : 100,
+				"step": 1,
+          		"unit": "px",
+				"default": 100
+			}
+          ]
+        }
+      ],
+      "presets" : [
+          {
+            "name" : "slick_slider"
+          }
+      ]
+
+  }
+{% endschema %}
