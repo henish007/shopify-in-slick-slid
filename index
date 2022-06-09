@@ -108,6 +108,7 @@
     height: 50px;
   	border: 2px solid {{ section.settings.arrow_color}};
   	transition: .5s;
+  	background-color: {{ section.settings.arrow_bg_color}};
 }
 .slider.slick_slider button.slick-arrow:before {
     color:  {{ section.settings.arrow_color}};
@@ -123,6 +124,7 @@
  
 .slider.slick_slider button.slick-arrow:hover {
   	border: 2px solid {{ section.settings.arrow_hover_color}};
+  	background-color: {{ section.settings.arrow_hover_bg_color}};
 }
 .slider.slick_slider button.slick-arrow:hover:before {
     color:  {{ section.settings.arrow_hover_color}};
@@ -298,8 +300,20 @@
         },
         {
           "type": "color",
+          "id": "arrow_bg_color",
+          "label": "Arrow Backgound color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
           "id": "arrow_hover_color",
           "label": "Arrow Hover color",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "arrow_hover_bg_color",
+          "label": "Arrow Hover Background color",
           "default": "#000"
         },
         {
@@ -405,14 +419,9 @@
               "label": "Slider Button URL"
             },
 			{
-				"type": "range",
+				"type": "text",
 				"id": "padding_sec",
-				"label" : "button",
-				"min" : 0,
-				"max" : 100,
-				"step": 1,
-          		"unit": "px",
-				"default": 100
+				"label" : "button"
 			}
           ]
         }
